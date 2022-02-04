@@ -24,5 +24,10 @@ namespace Djikstry
         {
             InitializeComponent();
         }
+
+        private void SolveButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

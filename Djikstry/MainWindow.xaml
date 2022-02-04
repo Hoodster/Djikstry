@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Djikstry"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" FontSize="16" Margin="0,0,10,0">Algorithm execution type:</TextBlock>
-            <ComboBox Name="AlgorithmChoiceCombo" SelectionChanged="AlgorithmChoiceCombo_SelectionChanged" Grid.Column="1" Margin="0,0,10,0" Height="25" Width="100">
+            <ComboBox Name="AlgorithmChoiceCombo" Grid.Column="1" Margin="0,0,10,0" Height="25" Width="100">
                 <ComboBoxItem IsSelected="True">C#</ComboBoxItem>
                 <ComboBoxItem>Assembly</ComboBoxItem>
             </ComboBox>
@@ -37,13 +37,17 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Row="0" Grid.Column="0" Margin="0,5"/>
-            <TextBox Grid.Row="1" Grid.Column="0" Margin="0,5"/>
-            <RichTextBox Height="50" Grid.Row="2" Grid.Column="0" Margin="0,5"/>
-            <Button Grid.Row="3" Margin="0,5">Solve</Button>
+            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Starting point:</TextBlock>
+            <TextBox x:Name="StartingPoint" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
+            <TextBlock TextWrapping="Wrap" Width="120" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Number of vertexes:</TextBlock>
+            <TextBox x:Name="NumberOfVertexes" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Graph matrix:</TextBlock>
+            <RichTextBox x:Name="MatrixInput" Height="50" Grid.Row="2" Grid.Column="1" Margin="0,5"/>
+            <Button x:Name="SolveButton" Grid.Row="3" Grid.ColumnSpan="2" MaxWidth="100" Margin="0,5" Click="SolveButton_Click">Solve</Button>
         </Grid>
     </Grid>
 </Window>
