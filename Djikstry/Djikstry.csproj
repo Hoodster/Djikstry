@@ -7,4 +7,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DjikstryCSHarp\DjikstryCSHarp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DjikstryCSHarp">
+      <HintPath>..\DjikstryCSHarp\bin\Debug\net5.0\DjikstryCSHarp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

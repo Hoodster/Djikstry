@@ -2,7 +2,7 @@
 
 namespace DjikstryCSHarp
 {
-    public class Node
+    public struct Node
     {
         public int Distance { get; set; }
         public int Predeccessor { get; set; }

@@ -42,12 +42,12 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Starting point:</TextBlock>
-            <TextBox x:Name="StartingPoint" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
+            <TextBox x:Name="StartingPoint" Grid.Row="0" Grid.Column="1" Margin="0,5" TextChanged="CheckInputToProcess"/>
             <TextBlock TextWrapping="Wrap" Width="120" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Number of vertexes:</TextBlock>
-            <TextBox x:Name="NumberOfVertexes" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
+            <TextBox x:Name="NumberOfVertexes" Grid.Row="1" Grid.Column="1" Margin="0,5" TextChanged="CheckInputToProcess"/>
             <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Graph matrix:</TextBlock>
-            <RichTextBox x:Name="MatrixInput" Height="50" Grid.Row="2" Grid.Column="1" Margin="0,5"/>
-            <Button x:Name="SolveButton" Grid.Row="3" Grid.ColumnSpan="2" MaxWidth="100" Margin="0,5" Click="SolveButton_Click">Solve</Button>
+            <TextBox x:Name="MatrixInput" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="50" Grid.Row="2" Grid.Column="1" Margin="0,5" TextChanged="CheckInputToProcess"/>
+            <Button x:Name="SolveButton" IsEnabled="False" Grid.Row="3" Grid.ColumnSpan="2" MaxWidth="100" Margin="0,5" Click="SolveButton_Click">Solve</Button>
         </Grid>
     </Grid>
 </Window>
