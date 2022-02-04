@@ -7,6 +7,43 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" FontSize="16" Margin="0,0,10,0">Algorithm execution type:</TextBlock>
+            <ComboBox Name="AlgorithmChoiceCombo" SelectionChanged="AlgorithmChoiceCombo_SelectionChanged" Grid.Column="1" Margin="0,0,10,0" Height="25" Width="100">
+                <ComboBoxItem IsSelected="True">C#</ComboBoxItem>
+                <ComboBoxItem>Assembly</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
+            <TextBox Grid.Row="0" Grid.Column="0" Margin="0,5"/>
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="0,5"/>
+            <RichTextBox Height="50" Grid.Row="2" Grid.Column="0" Margin="0,5"/>
+            <Button Grid.Row="3" Margin="0,5">Solve</Button>
+        </Grid>
     </Grid>
 </Window>
