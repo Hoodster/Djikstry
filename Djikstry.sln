@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Djikstry", "Djikstry\Djikstry.csproj", "{978E2ACF-2223-40DA-8C0E-83A5A25FE800}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Djikstry", "Djikstry\Djikstry.csproj", "{978E2ACF-2223-40DA-8C0E-83A5A25FE800}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DjikstryCSHarp", "DjikstryCSHarp\DjikstryCSHarp.csproj", "{A428C8FC-59F9-4E60-94CE-D28828C43789}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DjikstryCSHarp", "DjikstryCSHarp\DjikstryCSHarp.csproj", "{A428C8FC-59F9-4E60-94CE-D28828C43789}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

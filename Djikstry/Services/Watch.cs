@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Djikstry.Services
 {
-    public class Watch<T> where T : new()
+    public class Watch<T>
     {
         private Stopwatch stopWatch;
         private double duration;
@@ -13,7 +13,6 @@ namespace Djikstry.Services
 
         public Watch()
         {
-            data = new T();
             stopWatch = new Stopwatch();
         }
 

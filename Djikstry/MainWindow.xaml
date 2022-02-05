@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" FontSize="16" Margin="0,0,10,0">Algorithm execution type:</TextBlock>
-            <ComboBox Name="AlgorithmChoiceCombo" Grid.Column="1" Margin="0,0,10,0" Height="25" Width="100">
+            <ComboBox x:Name="AlgorithmChoiceCombo" Grid.Column="1" Margin="0,0,10,0" Height="25" Width="100" SelectionChanged="AlgorithmChoiceCombo_SelectionChanged">
                 <ComboBoxItem IsSelected="True">C#</ComboBoxItem>
                 <ComboBoxItem>Assembly</ComboBoxItem>
             </ComboBox>

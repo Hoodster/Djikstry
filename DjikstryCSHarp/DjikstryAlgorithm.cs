@@ -2,7 +2,7 @@
 {
     public class DjikstryAlgorithm
     {
-        public Node[] Solve(int[,] matrix, int startPosition)
+        public static Node[] Solve(int[,] matrix, int startPosition)
         {
             var tab = new Node[matrix.GetLength(0)];
             for (int i = 0; i < matrix.GetLength(0); i++)

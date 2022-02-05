@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System;
+using DjikstryCSHarp;
+using Djikstry.Services;
 
 namespace Djikstry
 {
@@ -8,6 +10,9 @@ namespace Djikstry
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Func<Node[]> executingFunction;
+        private bool _isCSharpLibrary = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -24,9 +29,14 @@ namespace Djikstry
         {
             var matrixLength = int.Parse(NumberOfVertexes.Text);
             var matrix = MapMatrixInput(MatrixInput.Text, matrixLength);
-            var djikstryAlgorithm = new DjikstryCSHarp.DjikstryAlgorithm();
-            var result = djikstryAlgorithm.Solve(matrix, int.Parse(StartingPoint.Text));
-            Console.Write(result);
+
+            
+            executingFunction = SetExecutingLibrary(_isCSharpLibrary, matrix, int.Parse(StartingPoint.Text));
+
+            Watch<Node[]> watchdog = new Watch<Node[]>();
+            watchdog.RunOnWatch(() => executingFunction());
+            var executionTimeResult = watchdog.GetExecutionTime();
+            var dataResult = watchdog.GetData();
         }
 
         private static int[,] MapMatrixInput(string input, int matrixLength)
@@ -47,6 +57,25 @@ namespace Djikstry
                 i++;
             }
             return output;
+        }
+
+        private static Func<Node[]> SetExecutingLibrary(bool isCSharpLibrary, int[,] matrix, int startingPoint)
+        {
+            if (isCSharpLibrary)
+            {
+                var djikstryAlgorithmCSharp = new DjikstryAlgorithm();
+                return () => DjikstryAlgorithm.Solve(matrix, startingPoint);
+            } else
+            {
+                var djikstryAlgorithmAssembly = new DjikstryAssemblyAlgorithm();
+                return () => djikstryAlgorithmAssembly.WrapSolve(matrix, startingPoint);
+            }
+            
+        }
+
+        private void AlgorithmChoiceCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            _isCSharpLibrary = AlgorithmChoiceCombo.SelectedIndex == 0;
         }
     }
 }

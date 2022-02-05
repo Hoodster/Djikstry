@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Djikstry": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
