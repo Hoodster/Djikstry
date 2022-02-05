@@ -8,8 +8,8 @@ namespace Djikstry
 {
     public class InputData
     {
-        public string FirstNode;
-        public string[][]? Matrix;
-        public string NumberOfVertexes;
+        public string FirstNode { get; set; }
+        public string[][]? Matrix { get; set; }
+        public string NumberOfVertexes { get; set; }
     }
 }
