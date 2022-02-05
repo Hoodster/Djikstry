@@ -2,7 +2,8 @@
 using System;
 using DjikstryCSHarp;
 using Djikstry.Services;
-
+using Newtonsoft.Json;
+#pragma warning disable CS8602
 namespace Djikstry
 {
     /// <summary>
@@ -16,6 +17,30 @@ namespace Djikstry
         public MainWindow()
         {
             InitializeComponent();
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length == 1)
+            {
+                var inputArgsObject = JsonConvert.DeserializeObject<InputData>(args[0]);
+                if (inputArgsObject == null)
+                {
+                    return;
+                }
+                StartingPoint.Text =  inputArgsObject.FirstNode;
+                NumberOfVertexes.Text = inputArgsObject.NumberOfVertexes;
+
+                string matrixInputText = "";
+                foreach (var matrixRow in inputArgsObject.Matrix)
+
+                {
+                    matrixInputText += matrixRow.ToString() + "\r\n";
+                }
+                MatrixInput.Text = matrixInputText;
+            } else if (args.Length == 3)
+            {
+                StartingPoint.Text = args[0];
+                NumberOfVertexes.Text = args[1];
+                MatrixInput.Text = args[2];
+            }
         }
 
         private void CheckInputToProcess(object sender, RoutedEventArgs e)
@@ -79,3 +104,4 @@ namespace Djikstry
         }
     }
 }
+#pragma warning restore
