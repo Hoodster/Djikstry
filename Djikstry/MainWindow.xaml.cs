@@ -11,14 +11,14 @@ namespace Djikstry
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Func<Node[]> executingFunction;
+        private Func<int> executingFunction;
         private bool _isCSharpLibrary = true;
 
         public MainWindow()
         {
             InitializeComponent();
             string[] args = Environment.GetCommandLineArgs();
-            if (args.Length == 1)
+            if (args.Length == 2)
             {
                 var inputArgsObject = JsonConvert.DeserializeObject<InputData>(args[0]);
                 if (inputArgsObject == null)
@@ -35,7 +35,7 @@ namespace Djikstry
                     matrixInputText += matrixRow.ToString() + "\r\n";
                 }
                 MatrixInput.Text = matrixInputText;
-            } else if (args.Length == 3)
+            } else if (args.Length == 4)
             {
                 StartingPoint.Text = args[0];
                 NumberOfVertexes.Text = args[1];
@@ -58,7 +58,7 @@ namespace Djikstry
             
             executingFunction = SetExecutingLibrary(_isCSharpLibrary, matrix, int.Parse(StartingPoint.Text));
 
-            Watch<Node[]> watchdog = new Watch<Node[]>();
+            Watch<int> watchdog = new Watch<int>();
             watchdog.RunOnWatch(() => executingFunction());
             var executionTimeResult = watchdog.GetExecutionTime();
             var dataResult = watchdog.GetData();
@@ -84,18 +84,12 @@ namespace Djikstry
             return output;
         }
 
-        private static Func<Node[]> SetExecutingLibrary(bool isCSharpLibrary, int[,] matrix, int startingPoint)
+        private static Func<int> SetExecutingLibrary(bool isCSharpLibrary, int[,] matrix, int startingPoint)
         {
-            if (isCSharpLibrary)
-            {
-                var djikstryAlgorithmCSharp = new DjikstryAlgorithm();
-                return () => DjikstryAlgorithm.Solve(matrix, startingPoint);
-            } else
-            {
+
                 var djikstryAlgorithmAssembly = new DjikstryAssemblyAlgorithm();
-                return () => djikstryAlgorithmAssembly.WrapSolve(matrix, startingPoint);
-            }
-            
+                return () => djikstryAlgorithmAssembly.WrapSolve();
+
         }
 
         private void AlgorithmChoiceCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

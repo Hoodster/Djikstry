@@ -5,18 +5,15 @@ namespace Djikstry.Services
 {
     public class DjikstryAssemblyAlgorithm
     {
-        public Node[] WrapSolve(int[,] matrix, int startPosition)
+        public int WrapSolve()
         {
             unsafe
             {
-                fixed (int* matrix_ptr = &matrix[0,0])
-                {
-                    return Solve(matrix_ptr, startPosition);
-                }
+                return mojaFunkcjaAsm();
             }
         }
 
-        [DllImport("DjikstryAssembly.dll")]
-        private static extern unsafe Node[] Solve(int* matrix, int startPosition);
+        [DllImport("DjikstryAsm.dll")]
+        private static extern unsafe int mojaFunkcjaAsm();
     }
 }
