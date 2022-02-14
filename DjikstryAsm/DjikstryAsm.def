@@ -1,2 +1,2 @@
 LIBRARY DjikstryAsm
-EXPORTS mojaFunkcjaAsm
+EXPORTS djikstryAssembly

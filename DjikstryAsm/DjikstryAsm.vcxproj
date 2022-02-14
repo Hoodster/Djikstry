@@ -140,6 +140,7 @@
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>DjikstryAsm.def</ModuleDefinitionFile>
       <NoEntryPoint>true</NoEntryPoint>
+      <LargeAddressAware>false</LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

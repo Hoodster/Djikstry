@@ -1,6 +1,13 @@
-﻿using System.Windows;
+﻿#region MetaHeader
+//Temat: Algorytm Djikstry
+//Opis: sample opis
+//Data implementacji: 13.02.2022
+//
+//Członkowie:
+#endregion
+
+using System.Windows;
 using System;
-using DjikstryCSHarp;
 using Djikstry.Services;
 using Newtonsoft.Json;
 #pragma warning disable CS8602
