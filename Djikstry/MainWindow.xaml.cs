@@ -10,6 +10,7 @@ using System.Windows;
 using System;
 using Djikstry.Services;
 using Newtonsoft.Json;
+using DjikstryCSHarp;
 #pragma warning disable CS8602
 namespace Djikstry
 {
@@ -18,7 +19,7 @@ namespace Djikstry
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Func<int> executingFunction;
+        private Func<Node[]> executingFunction;
         private bool _isCSharpLibrary = true;
 
         public MainWindow()
@@ -65,10 +66,18 @@ namespace Djikstry
             
             executingFunction = SetExecutingLibrary(_isCSharpLibrary, matrix, int.Parse(StartingPoint.Text));
 
-            Watch<int> watchdog = new Watch<int>();
+            Watch<Node[]> watchdog = new Watch<Node[]>();
             watchdog.RunOnWatch(() => executingFunction());
             var executionTimeResult = watchdog.GetExecutionTime();
             var dataResult = watchdog.GetData();
+            var resultString = $"Punkt początkowy: {StartingPoint.Text} \n\n";
+            int i = 0;
+            foreach(var node in dataResult)
+            {
+                resultString += $"{i}: {node.Distance}, poprzednik: {node.Predeccessor} \n";
+            }
+            resultString += $"Czas wykonania: {executionTimeResult}ms";
+            results.Text = resultString;
         }
 
         private static int[,] MapMatrixInput(string input, int matrixLength)
@@ -91,11 +100,17 @@ namespace Djikstry
             return output;
         }
 
-        private static Func<int> SetExecutingLibrary(bool isCSharpLibrary, int[,] matrix, int startingPoint)
+        private static Func<Node[]> SetExecutingLibrary(bool isCSharpLibrary, int[,] matrix, int startingPoint)
         {
-
+            if (isCSharpLibrary)
+            {
+                return () => DjikstryAlgorithm.Solve(matrix, startingPoint);
+            }
+            else
+            {
                 var djikstryAlgorithmAssembly = new DjikstryAssemblyAlgorithm();
-                return () => djikstryAlgorithmAssembly.WrapSolve();
+                return () => djikstryAlgorithmAssembly.WrapSolve(matrix, matrix.GetLength(0), startingPoint);
+            }
 
         }
 

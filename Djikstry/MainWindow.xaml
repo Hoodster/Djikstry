@@ -47,7 +47,8 @@
             <TextBox x:Name="NumberOfVertexes" Grid.Row="1" Grid.Column="1" Margin="0,5" TextChanged="CheckInputToProcess"/>
             <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Graph matrix:</TextBlock>
             <TextBox x:Name="MatrixInput" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="50" Grid.Row="2" Grid.Column="1" Margin="0,5" TextChanged="CheckInputToProcess"/>
-            <Button x:Name="SolveButton" IsEnabled="False" Grid.Row="3" Grid.ColumnSpan="2" MaxWidth="100" Margin="0,5" Click="SolveButton_Click">Solve</Button>
+            <Button x:Name="SolveButton" Grid.Row="3" Grid.ColumnSpan="2" MaxWidth="100" Margin="0,5" Click="SolveButton_Click">Solve</Button>
         </Grid>
+        <TextBlock x:Name="results" Margin="5,0,0,0" Grid.Row="3" Grid.Column="0"></TextBlock>
     </Grid>
 </Window>

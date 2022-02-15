@@ -1,4 +1,5 @@
 ﻿using DjikstryCSHarp;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Djikstry.Services
@@ -6,31 +7,35 @@ namespace Djikstry.Services
     public struct NodeAssembly
     {
         public int Distance;
-        public int Predecessor;
         public int isPristine;
+        public int Predecessor;
     }
     public class DjikstryAssemblyAlgorithm
     {
-        public int WrapSolve()
+        public Node[] WrapSolve(int[,] matrix, int size, int startingPoint)
         {
-            var nodes = new NodeAssembly[6];
-            int[,] graph= new int[6,6] {
-                { 0, 1, 2, 0, 0, 0},
-        { 1, 0, 0, 5, 1, 0},
-        { 2, 0, 0, 2, 3, 0},
-        { 0, 5, 2, 0, 2, 2},
-        { 0, 1, 3, 2, 0, 1},
-        { 0, 0, 0, 2, 1, 0}
-            };
+            var nodes = new Node[size];
+            var nodesAssembly = new NodeAssembly[6];
+            
             unsafe
             {
-                fixed (int* matrixAddress = &graph[0,0])
+                fixed (int* matrixAddress = &matrix[0,0])
                 {
-                    fixed (NodeAssembly* nodesAddress = &nodes[0])
+                    fixed (NodeAssembly* nodesAddress = &nodesAssembly[0])
                     {
-                        int* result = djikstryAssembly(matrixAddress, nodesAddress, 6, 0);
-
-                        return 1;
+                        
+                        int* result = djikstryAssembly(matrixAddress, nodesAddress, size, startingPoint);
+                        for (int i = 0; i < size; i++)
+                        {
+                            var node = new Node
+                            {
+                                Distance = nodesAddress[i].Distance,
+                                IsPristine = (nodesAddress[i].isPristine == 0) ? false : true,
+                                Predeccessor = nodesAddress[i].Predecessor
+                            };
+                            nodes[i] = node;
+                        }
+                        return nodes;
                     }
                 }
             }
