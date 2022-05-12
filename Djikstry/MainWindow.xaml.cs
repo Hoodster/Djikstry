@@ -19,104 +19,74 @@ namespace Djikstry
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Func<Node[]> executingFunction;
-        private bool _isCSharpLibrary = true;
-
         public MainWindow()
         {
             InitializeComponent();
-            string[] args = Environment.GetCommandLineArgs();
-            if (args.Length == 2)
-            {
-                var inputArgsObject = JsonConvert.DeserializeObject<InputData>(args[0]);
-                if (inputArgsObject == null)
-                {
-                    return;
-                }
-                StartingPoint.Text =  inputArgsObject.FirstNode;
-                NumberOfVertexes.Text = inputArgsObject.NumberOfVertexes;
+            Input11.Text = "1";
+            Input12.Text = "2";
+            Input13.Text = "3";
+            Input14.Text = "4";
 
-                string matrixInputText = "";
-                foreach (var matrixRow in inputArgsObject.Matrix)
-
-                {
-                    matrixInputText += matrixRow.ToString() + "\r\n";
-                }
-                MatrixInput.Text = matrixInputText;
-            } else if (args.Length == 4)
-            {
-                StartingPoint.Text = args[0];
-                NumberOfVertexes.Text = args[1];
-                MatrixInput.Text = args[2];
-            }
+            Input21.Text = "2";
+            Input22.Text = "2";
+            Input23.Text = "2";
+            Input24.Text = "2";
         }
 
-        private void CheckInputToProcess(object sender, RoutedEventArgs e)
+        private void Execute(int type, out float[] t)
         {
-            SolveButton.IsEnabled = NumberOfVertexes.Text.Length != 0
-                && MatrixInput.Text.Length != 0 
-                && StartingPoint.Text.Length != 0;
+            var x1 = new float[] { 
+                float.Parse(Input11.Text), 
+                float.Parse(Input12.Text),
+                float.Parse(Input13.Text),
+                float.Parse(Input14.Text),
+            };
+
+            var x2 = new float[] {
+                float.Parse(Input21.Text),
+                float.Parse(Input22.Text),
+                float.Parse(Input23.Text),
+                float.Parse(Input24.Text),
+            };
+            var transferData = new InputData(x1, x2, type);
+            var djikstryAlgorithmAssembly = new DjikstryAssemblyAlgorithm();
+            djikstryAlgorithmAssembly.WrapSolve(transferData, out float[] result);
+            t = result;
         }
 
-        private void SolveButton_Click(object sender, RoutedEventArgs e)
+        private void SetResult(float[] results)
         {
-            var matrixLength = int.Parse(NumberOfVertexes.Text);
-            var matrix = MapMatrixInput(MatrixInput.Text, matrixLength);
-
-            
-            executingFunction = SetExecutingLibrary(_isCSharpLibrary, matrix, int.Parse(StartingPoint.Text));
-
-            Watch<Node[]> watchdog = new Watch<Node[]>();
-            watchdog.RunOnWatch(() => executingFunction());
-            var executionTimeResult = watchdog.GetExecutionTime();
-            var dataResult = watchdog.GetData();
-            var resultString = $"Punkt początkowy: {StartingPoint.Text} \n\n";
-            int i = 0;
-            foreach(var node in dataResult)
-            {
-                resultString += $"{i}: {node.Distance}, poprzednik: {node.Predeccessor} \n";
-            }
-            resultString += $"Czas wykonania: {executionTimeResult}ms";
-            results.Text = resultString;
-        }
-
-        private static int[,] MapMatrixInput(string input, int matrixLength)
-        {
-            int i = 0;
-            int[,] output;
-            var rowsString = input.Split("\r\n");
-            output = new int[matrixLength, matrixLength];
-            foreach (var rowInput in rowsString)
-            {
-                var row = rowInput.Split(" ");
-                int l = 0;
-                foreach (var colInput in row)
-                {
-                    output[i, l] = int.Parse(colInput.ToString());
-                    l++;
-                }
-                i++;
-            }
-            return output;
-        }
-
-        private static Func<Node[]> SetExecutingLibrary(bool isCSharpLibrary, int[,] matrix, int startingPoint)
-        {
-            if (isCSharpLibrary)
-            {
-                return () => DjikstryAlgorithm.Solve(matrix, startingPoint);
-            }
-            else
-            {
-                var djikstryAlgorithmAssembly = new DjikstryAssemblyAlgorithm();
-                return () => djikstryAlgorithmAssembly.WrapSolve(matrix, matrix.GetLength(0), startingPoint);
-            }
+            string text = "";
+            text += $"Result 1: {results[0]} \n";
+            text += $"Result 2: {results[1]} \n";
+            text += $"Result 3: {results[2]} \n";
+            text += $"Result 4: {results[3]} \n";
+            Result.Text = text;
 
         }
 
-        private void AlgorithmChoiceCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void PlusButton_Click(object sender, RoutedEventArgs e)
         {
-            _isCSharpLibrary = AlgorithmChoiceCombo.SelectedIndex == 0;
+            Execute(0, out float[] result);
+            SetResult(result);
+        }
+
+        private void MinusButton_Click(object sender, RoutedEventArgs e)
+        {
+            Execute(1, out float[] result);
+            SetResult(result);
+        }
+
+        private void MultipleButton_Click(object sender, RoutedEventArgs e)
+        {
+            Execute(2, out float[] result);
+            SetResult(result);
+        }
+
+        private void DivideButton_Click(object sender, RoutedEventArgs e)
+        {
+            Execute(3, out float[] result);
+            SetResult(result);
         }
     }
 }

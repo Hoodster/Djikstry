@@ -8,47 +8,49 @@
         Title="MainWindow" Height="450" Width="900">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition MinHeight="40px" Height="*"/>
+            <RowDefinition MinHeight="40px" Height="auto"/>
+            <RowDefinition MinHeight="40px" Height="auto"/>
+            <RowDefinition MinHeight="40px" Height="auto"/>
+            <RowDefinition MinHeight="90px" Height="auto"/>
+            <RowDefinition MinHeight="40px" Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition MinWidth="80px" Width="auto"/>
+            <ColumnDefinition MinWidth="80px" Width="auto"/>
+            <ColumnDefinition MinWidth="80px" Width="auto"/>
+            <ColumnDefinition MinWidth="80px" Width="auto"/>
+            <ColumnDefinition MinWidth="80px" Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="2">
+        <Grid Margin="0,0,0,20" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" FontSize="16" Margin="0,0,10,0">Algorithm execution type:</TextBlock>
-            <ComboBox x:Name="AlgorithmChoiceCombo" Grid.Column="1" Margin="0,0,10,0" Height="25" Width="100" SelectionChanged="AlgorithmChoiceCombo_SelectionChanged">
-                <ComboBoxItem IsSelected="True">C#</ComboBoxItem>
-                <ComboBoxItem>Assembly</ComboBoxItem>
-            </ComboBox>
-        </Grid>
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition MinWidth="30px" Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="Input11"  Grid.Column="0" Grid.Row="0"/>
+            <TextBox x:Name="Input12" Grid.Column="0" Grid.Row="1"/>
+            <TextBox x:Name="Input13" Grid.Column="0" Grid.Row="2"/>
+            <TextBox x:Name="Input14" Grid.Column="0" Grid.Row="3"/>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Starting point:</TextBlock>
-            <TextBox x:Name="StartingPoint" Grid.Row="0" Grid.Column="1" Margin="0,5" TextChanged="CheckInputToProcess"/>
-            <TextBlock TextWrapping="Wrap" Width="120" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Number of vertexes:</TextBlock>
-            <TextBox x:Name="NumberOfVertexes" Grid.Row="1" Grid.Column="1" Margin="0,5" TextChanged="CheckInputToProcess"/>
-            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Graph matrix:</TextBlock>
-            <TextBox x:Name="MatrixInput" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="50" Grid.Row="2" Grid.Column="1" Margin="0,5" TextChanged="CheckInputToProcess"/>
-            <Button x:Name="SolveButton" Grid.Row="3" Grid.ColumnSpan="2" MaxWidth="100" Margin="0,5" Click="SolveButton_Click">Solve</Button>
+            <TextBox x:Name="Input21" Grid.Column="2" Grid.Row="0"/>
+            <TextBox x:Name="Input22" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="Input23" Grid.Column="2" Grid.Row="2"/>
+            <TextBox x:Name="Input24" Grid.Column="2" Grid.Row="3"/>
         </Grid>
-        <TextBlock x:Name="results" Margin="5,0,0,0" Grid.Row="3" Grid.Column="0"></TextBlock>
+        <Button x:Name="PlusButton" Click="PlusButton_Click" Grid.Row="2" Grid.Column="1">+</Button>
+        <Button x:Name="MinusButton" Click="MinusButton_Click" Grid.Row="2" Grid.Column="2">-</Button>
+        <Button x:Name="MultipleButton" Click="MultipleButton_Click" Grid.Row="2" Grid.Column="3">*</Button>
+        <Button x:Name="DivideButton" Click="DivideButton_Click" Grid.Row="2" Grid.Column="4">/</Button>
+
+        <TextBlock x:Name="Result" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2">Wynik</TextBlock>
+
     </Grid>
 </Window>
