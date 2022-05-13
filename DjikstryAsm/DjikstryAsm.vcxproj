@@ -85,8 +85,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)\Djikstry\bin\Debug\net5.0-windows</IntDir>
-    <OutDir>$(SolutionDir)\Djikstry\bin\Debug\net5.0-windows</OutDir>
+    <IntDir>$(SolutionDir)\Lab3Asm\bin\Debug\netcoreapp3.1</IntDir>
+    <OutDir>$(SolutionDir)\Lab3Asm\bin\Debug\netcoreapp3.1</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

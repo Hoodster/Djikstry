@@ -1,2 +1,3 @@
 LIBRARY DjikstryAsm
-EXPORTS djikstryAssembly
+EXPORTS exercOne
+EXPORTS exercTwo

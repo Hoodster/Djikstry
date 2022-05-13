@@ -4,7 +4,7 @@
 //Data implementacji: 13.02.2022
 //
 //Członkowie:
-#endregion
+#endregion Metaheader
 
 using System.Windows;
 using System;
@@ -60,24 +60,42 @@ namespace Djikstry
 
         private void SolveButton_Click(object sender, RoutedEventArgs e)
         {
-            var matrixLength = int.Parse(NumberOfVertexes.Text);
-            var matrix = MapMatrixInput(MatrixInput.Text, matrixLength);
+           // var matrixLength = int.Parse(NumberOfVertexes.Text);
+      //      var matrix = MapMatrixInput("2 2", 1);
 
+
+            var djikstryAlgorithmAssembly = new DjikstryAssemblyAlgorithm();
+            djikstryAlgorithmAssembly.WrapSolve();
+
+            //Watch<Node[]> watchdog = new Watch<Node[]>();
+            //watchdog.RunOnWatch(() => executingFunction());
+            //var executionTimeResult = watchdog.GetExecutionTime();
+            //var dataResult = watchdog.GetData();
+            //var resultString = $"Punkt początkowy: {StartingPoint.Text} \n\n";
+            //int i = 0;
+            //foreach(var node in dataResult)
+            //{
+            //    resultString += $"{i}: \n dystans: {node.Distance}, \n poprzednicy: {SetPath(i, dataResult, int.Parse(StartingPoint.Text))} \n";
+            //    i++;
+            //}
             
-            executingFunction = SetExecutingLibrary(_isCSharpLibrary, matrix, int.Parse(StartingPoint.Text));
+            //resultString += $"Czas wykonania: {executionTimeResult}ms";
+            //results.Text = resultString;
+        }
 
-            Watch<Node[]> watchdog = new Watch<Node[]>();
-            watchdog.RunOnWatch(() => executingFunction());
-            var executionTimeResult = watchdog.GetExecutionTime();
-            var dataResult = watchdog.GetData();
-            var resultString = $"Punkt początkowy: {StartingPoint.Text} \n\n";
-            int i = 0;
-            foreach(var node in dataResult)
-            {
-                resultString += $"{i}: {node.Distance}, poprzednik: {node.Predeccessor} \n";
-            }
-            resultString += $"Czas wykonania: {executionTimeResult}ms";
-            results.Text = resultString;
+        private string SetPath(int index, Node[] nodes, int startPath)
+        {
+            int _predeccessor = 0;
+            string path = "";
+
+            do
+            {             
+                _predeccessor = nodes[index].Predeccessor;
+                index = _predeccessor;
+                    path += $"{_predeccessor} ";
+                
+            } while (_predeccessor != -1);
+            return path;
         }
 
         private static int[,] MapMatrixInput(string input, int matrixLength)
@@ -86,32 +104,18 @@ namespace Djikstry
             int[,] output;
             var rowsString = input.Split("\r\n");
             output = new int[matrixLength, matrixLength];
-            foreach (var rowInput in rowsString)
-            {
-                var row = rowInput.Split(" ");
-                int l = 0;
-                foreach (var colInput in row)
-                {
-                    output[i, l] = int.Parse(colInput.ToString());
-                    l++;
-                }
-                i++;
-            }
+            //foreach (var rowInput in rowsString)
+            //{
+            //    var row = rowInput.Split(" ");
+            //    int l = 0;
+            //    foreach (var colInput in row)
+            //    {
+            //        output[i, l] = int.Parse(colInput.ToString());
+            //        l++;
+            //    }
+            //    i++;
+            //}
             return output;
-        }
-
-        private static Func<Node[]> SetExecutingLibrary(bool isCSharpLibrary, int[,] matrix, int startingPoint)
-        {
-            if (isCSharpLibrary)
-            {
-                return () => DjikstryAlgorithm.Solve(matrix, startingPoint);
-            }
-            else
-            {
-                var djikstryAlgorithmAssembly = new DjikstryAssemblyAlgorithm();
-                return () => djikstryAlgorithmAssembly.WrapSolve(matrix, matrix.GetLength(0), startingPoint);
-            }
-
         }
 
         private void AlgorithmChoiceCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
