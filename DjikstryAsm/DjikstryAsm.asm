@@ -25,9 +25,7 @@ mov result, 0
 
 ;iteracja 1
 call addOperation
-mov rax, rcx
-add rax, 12
-mov rcx, rax
+add rcx, 12
 call assign
 
 ;iteracja 2
@@ -87,7 +85,6 @@ add eax, [rbx]
 add eax, [rdx]
 add rax, [result]
 mov [result], rax
-mov rax, [result]
 ret
 
 endProgram:

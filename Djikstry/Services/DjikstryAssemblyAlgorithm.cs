@@ -1,5 +1,7 @@
 ﻿using DjikstryCSHarp;
 using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace Djikstry.Services
@@ -35,15 +37,15 @@ namespace Djikstry.Services
                                     var resultOne = exercOne(exercOneDataAddr);
                                     exercTwo(tab1Addr, tab2Addr, resultAddr, tab3Addr);
 
-                                    //Console.WriteLine("\n /======== Zadanie 1 \n");
-                                    //Console.WriteLine("Tablica wejciowa: \n " + exercOneData);
-                                    //Console.WriteLine("\n Wynik: \n");
-                                    //Console.WriteLine((int)resultOne);
+                                    Trace.WriteLine("\n /======== Zadanie 1 \n");
+                                    Trace.WriteLine("Tablica wejciowa: \n " + string.Join(", ", exercOneData));
+                                    Trace.WriteLine("\n Wynik: \n");
+                                    Trace.WriteLine((int)resultOne);
 
-                                    Console.WriteLine("\n /======== Zadanie 1 \n");
-                                    Console.WriteLine("Tablica wejciowa nr1 \n " + tab1);
-                                    Console.WriteLine("Tablica wejciowa nr1 \n " + tab2);
-                                    Console.WriteLine("\n Wynik: " + result);
+                                    Trace.WriteLine("\n /======== Zadanie 2 \n");
+                                    Trace.WriteLine("Tablica wejciowa nr1 \n " + string.Join(", ", tab1));
+                                    Trace.WriteLine("Tablica wejciowa nr1 \n " + string.Join(", ", tab2));
+                                    Trace.WriteLine("\n Wynik: " + string.Join(", ", result));
                                 }
                             }
                         }
